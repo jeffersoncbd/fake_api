@@ -32,13 +32,15 @@ async fn root_middleware(request: Request, next: Next) -> Response {
     let method = request.method().to_string();
     let uri = request.uri().to_string();
     let uri = uri.split("?").collect::<Vec<&str>>()[0];
-    println!("{} - {}", &method, uri);
 
     let path = format!("paths/{}.json", &uri[1..]);
 
     if let Ok(content) = fs::read_to_string(&path) {
+        println!("{: <7}  ✅ 200     {}", &method, uri);
         return Response::new(Body::from(content));
     }
+
+    println!("{: <7}  ❌ 404     {}", &method, uri);
 
     next.run(request).await
 }
