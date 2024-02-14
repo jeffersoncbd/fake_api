@@ -31,7 +31,8 @@ async fn main() {
 async fn root_middleware(request: Request, next: Next) -> Response {
     let method = request.method().to_string();
     let uri = request.uri().to_string();
-    println!("{} - {}", &method, &uri);
+    let uri = uri.split("?").collect::<Vec<&str>>()[0];
+    println!("{} - {}", &method, uri);
 
     let path = format!("paths/{}.json", &uri[1..]);
 
