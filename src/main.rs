@@ -7,6 +7,7 @@ use axum::{
     response::Response,
     Router,
 };
+use http::StatusCode;
 use tower_http::cors::{Any, CorsLayer};
 
 #[tokio::main]
@@ -37,7 +38,9 @@ async fn root_middleware(request: Request, next: Next) -> Response {
 
     if let Ok(content) = fs::read_to_string(&path) {
         println!("{: <7}  ✅ 200     {}", &method, uri);
-        return Response::new(Body::from(content));
+        let response = Response::new(Body::from(content));
+        // *response.status_mut() = StatusCode::BAD_REQUEST;
+        return response;
     }
 
     println!("{: <7}  ❌ 404     {}", &method, uri);
