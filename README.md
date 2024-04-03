@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/jeffersoncbd/fake_api/master/demo.png" width="400">
+  <img src="https://raw.githubusercontent.com/jeffersoncbd/fake_api/master/demo.png" width="800">
 </p>
 
 # Fake API
